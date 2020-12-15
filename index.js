@@ -1,0 +1,42 @@
+const express =require ('express')
+const app = express ()
+const mongoose = require('mongoose')
+
+const postRouter =require('./models/post')
+const userRouter = require('./models/user')
+require('dotenv').config()
+
+app.use(express.json())
+
+app.use('/posts',postRouter)
+app.use('/users',userRouter)
+
+
+const config={
+       useNewUrlParser: true,
+       useUnifiedTopology:true
+    }
+
+    mongoose.connect (process.env.MONGO_DB_URI,config)
+    .then(()=>{
+        console.log(err)
+    })
+
+
+    app.post('./login',(req, res)=>{
+        const username = req.query.username
+        const password= req.query.password
+
+        console.log(req)
+
+        if (username ==="Ama" && password ==="try"){
+            res.send('success')
+        }  else{
+            res.status(400).send('wrong username or password')
+        }
+
+      app.listen(5000, ()=>{
+          console.log('listening on port',5000)
+      })  
+    })
+
